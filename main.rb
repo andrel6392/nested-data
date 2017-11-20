@@ -1,3 +1,5 @@
+require 'json'
+violation_data = JSON.parse(%q|
 {
   "meta" : {
     "view" : {
@@ -1185,3 +1187,4 @@
 , [ 53, "C1F1F529-6395-49DF-9254-E171BA8D128B", 53, 1505749661, "994730", 1505749665, "399231", null, "Arena Nightclub & Event Space", "Nightclub", null, "135 W 41st \nGround Floor", "(212) 278-0988", "http://www.arenanyc.net/", "1", null, null, null, null, null, null, null, null, null, [ "{\"address\":\"135 W 41st Ground Floor\",\"city\":\"\",\"state\":\"\",\"zip\":\"\"}", "34.682185", "-86.499361", null, false ] ]
  ]
 }
+|)

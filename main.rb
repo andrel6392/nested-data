@@ -1188,3 +1188,11 @@ times_square = JSON.parse(%q|
  ]
 }
 |)
+=begin 
+times_square["data"][0][8]  Name 
+times_square["data"][0][9]  Venue type 
+times_square["data"][0][11] Address 
+times_square["data"][0][12] Phone Number
+=end
+
+

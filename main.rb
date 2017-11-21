@@ -1,5 +1,5 @@
 require 'json'
-violation_data = JSON.parse(%q|
+times_square = JSON.parse(%q|
 {
   "meta" : {
     "view" : {

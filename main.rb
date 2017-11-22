@@ -1196,3 +1196,15 @@ times_square["data"][0][12] Phone Number
 =end
 
 
+puts "What type of venue are you interested in doing in Times Square? "
+user_input = gets.chomp
+
+times_square["data"].each do |activies|
+   #puts activies[9]
+   if activies[9] == user_input
+     puts "#{activies[8]} is the name of the venue."
+     puts "This is the adress : #{activies[11]} "
+     puts "This is the phone number #{activies[12]}" 
+     puts 
+   end 
+end 

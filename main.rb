@@ -1195,16 +1195,21 @@ times_square["data"][0][11] Address
 times_square["data"][0][12] Phone Number
 =end
 
+def qwerty(times_square,user_input)
+  times_square["data"].each do |activities|
+    if activities[9] == user_input
+      return {name: activities[8], address: activities[11], phone_number: activities[12]}
+    end 
+  end
+end
 
 puts "What type of venue are you interested in doing in Times Square? "
-user_input = gets.chomp
+user_input = gets.chomp.capitalize
 
-times_square["data"].each do |activies|
-   #puts activies[9]
-   if activies[9] == user_input
-     puts "#{activies[8]} is the name of the venue."
-     puts "This is the adress : #{activies[11]} "
-     puts "This is the phone number #{activies[12]}" 
-     puts 
-   end 
-end 
+qwerty(times_square,user_input)
+
+
+
+
+
+

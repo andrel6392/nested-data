@@ -1195,43 +1195,47 @@ times_square["data"][0][11] Address
 times_square["data"][0][12] Phone Number
 =end
 
-def qwerty(times_square,venue_type)
+def find_venue(times_square,venue_type)
   # holiday_hash[:spring][:memorial_day] << supply
-  venues = {:name => [],  :address => [], :phone_number => [], :websites => []}
-  times_square["data"].each do |activities|
+  venues = {:name => [],  :address => [], :phone_number => [], :websites => []} #create hash to hold the data
+  times_square["data"].each do |activities| #iterate through the data
     if activities[9] == venue_type
-      venues[:name] << activities[8]
-      venues[:address] << activities[11]
-      venues[:phone_number] << activities[12]
-      venues[:websites] << activities[13]
+      venues[:name] << activities[8]            
+      venues[:address] << activities[11]        #push the data I want into the value array  
+      venues[:phone_number] << activities[12]   #made earlier in the hash above
+      venues[:websites] << activities[13]       
     end 
   end
-  venues
+  venues #return the hash
 end
 
-def asdfg(times_square)
-  puts "What type of venue are you interested in doing in Times Square? "
+def user_generated(times_square)
+  puts "What type of venue are you interested in doing in Times Square?"
+  puts "Choose from:"
+  puts "Theater, Comedy Club, Nightclub, Museums / Galleries, Live Music, Attractions / Amusement, Movies, or Lecture Hall"
   user_input = gets.chomp.downcase.split(" ").collect {|word| word.capitalize }.join(" ")
+  #take the user's input and break it down to capitalize each word
   puts "Do you want phone numbers for the venues?"
   phone_input = gets.chomp.downcase
   # puts "Do you want websites to show?"
   # website_input = gets.chomp.downcase
-  qwerty_hash = qwerty(times_square,user_input)
-  qwerty_hash[:name].length.times do |x|
-    puts "The name of the venue is #{qwerty_hash[:name][x]}"
-    puts "It is located at #{qwerty_hash[:address][x]}"
-    if phone_input == "yes"
-      puts "The phone number is #{qwerty_hash[:phone_number][x]}"
+  find_venue_hash = find_venue(times_square,user_input) #make hash accessable
+  find_venue_hash[:name].length.times do |x|  #how many times it should print the following lines with x as a place holder that keeps growing in value
+    puts "The name of the venue is #{find_venue_hash[:name][x]}"
+    puts "It is located at #{find_venue_hash[:address][x]}"
+    if phone_input == "yes" #whether or not the user wants the phone numbers
+      puts "The phone number is #{find_venue_hash[:phone_number][x]}"
     end
     # if website_input == "yes"
-    #   puts "The website is #{qwerty_hash[:website][x]}"
+    #   puts "The website is #{find_venue_hash[:website][x]}"
     # end
     puts
   end
 end
 
-asdfg(times_square)
+user_generated(times_square)
 
+# https://repl.it/repls/WorrisomeDeadRasbora
 
 
 

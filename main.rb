@@ -1196,15 +1196,19 @@ times_square["data"][0][12] Phone Number
 =end
 
 def qwerty(times_square,user_input)
+  venues = {:name => [],  :address => [], :phone_number => []}
   times_square["data"].each do |activities|
     if activities[9] == user_input
-      return {name: activities[8], address: activities[11], phone_number: activities[12]}
+      venues[:name] << activities[8]
+      venues[:address] << activities[11]
+      venues[:phone_number] << activities[12]
     end 
   end
+  venues
 end
 
 puts "What type of venue are you interested in doing in Times Square? "
-user_input = gets.chomp.capitalize
+user_input = gets.chomp.downcase.split(" ").collect {|word| word.capitalize }.join(" ")
 
 qwerty(times_square,user_input)
 

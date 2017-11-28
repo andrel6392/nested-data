@@ -1103,7 +1103,7 @@ times_square = JSON.parse(%q|
       "flags" : [ "default", "restorable", "restorePossibleForType" ]
     }
   },
-  "data" : [ [ 1, "09E3F389-F9DB-4B8F-8090-32A9F90CA7AC", 1, 1505749661, "994730", 1505749661, "994730", null, "Al Hirschfeld Theater", "Theater", "League", "302 W 45th St", "(212) 239-6200", null, "1", "10036", "40.759351", "-73.988864", "104", "3", "121", "1024993", "1010350037", "Clinton                                                                    ", [ "{\"address\":\"302 W 45th St\",\"city\":\"\",\"state\":\"\",\"zip\":\"\"}", "40.759351", "-73.988864", null, false ] ]
+  "data" : [ [ 1, "09E3F389-F9DB-4B8F-8090-32A9F90CA7AC", 1, 1505749661, "994730", 1505749661, "994730", null, "Al Hirschfeld Theater", "Theater", "League", "302 W 45th St", "(212) 239-6200", "https://www.newyorkcitytheatre.com/theaters/alhirschfeldtheater/theater.php" , "1", "10036", "40.759351", "-73.988864", "104", "3", "121", "1024993", "1010350037", "Clinton                                                                    ", [ "{\"address\":\"302 W 45th St\",\"city\":\"\",\"state\":\"\",\"zip\":\"\"}", "40.759351", "-73.988864", null, false ] ]
 , [ 2, "55EA5E5F-8581-4021-BCEF-9592EC7EFD28", 2, 1505749661, "994730", 1505749661, "994730", null, "The World Famous Laugh Factory", "Comedy Club", null, "303 W 42nd St", "212-586-7829 x304", null, "1", "10036", "40.757436", "-73.990254", "104", "3", "121", "1024947", "1010330032", "Clinton                                                                    ", [ "{\"address\":\"303 W 42nd St\",\"city\":\"\",\"state\":\"\",\"zip\":\"\"}", "40.757436", "-73.990254", null, false ] ]
 , [ 3, "38A15467-3140-4A4A-BEB7-EA44859F84BB", 3, 1505749661, "994730", 1505749661, "994730", null, "Bernard B. Jacobs Theatre", "Theater", "League", "242 W 45th St", "(212) 239-2820", null, "1", "10036", "40.758704", "-73.987294", "105", "3", "119", "1024716", "1010160055", "Midtown-Midtown South                                                      ", [ "{\"address\":\"242 W 45th St\",\"city\":\"\",\"state\":\"\",\"zip\":\"\"}", "40.758704", "-73.987294", null, false ] ]
 , [ 4, "95BFA033-C972-4E82-BD98-253E325826DA", 4, 1505749661, "994730", 1505749661, "994730", null, "Music Box Theater", "Theater", "League", "239 W 45th St", "212 239-6200", null, "1", "10036", "40.75866", "-73.987146", "105", "3", "119", "1024726", "1010170011", "Midtown-Midtown South                                                      ", [ "{\"address\":\"239 W 45th St\",\"city\":\"\",\"state\":\"\",\"zip\":\"\"}", "40.75866", "-73.987146", null, false ] ]
@@ -1197,12 +1197,13 @@ times_square["data"][0][12] Phone Number
 
 def qwerty(times_square,venue_type)
   # holiday_hash[:spring][:memorial_day] << supply
-  venues = {:name => [],  :address => [], :phone_number => []}
+  venues = {:name => [],  :address => [], :phone_number => [], :websites => []}
   times_square["data"].each do |activities|
     if activities[9] == venue_type
       venues[:name] << activities[8]
       venues[:address] << activities[11]
       venues[:phone_number] << activities[12]
+      venues[:websites] << activities[13]
     end 
   end
   venues
@@ -1211,13 +1212,20 @@ end
 def asdfg(times_square)
   puts "What type of venue are you interested in doing in Times Square? "
   user_input = gets.chomp.downcase.split(" ").collect {|word| word.capitalize }.join(" ")
+  puts "Do you want phone numbers for the venues?"
+  phone_input = gets.chomp.downcase
+  # puts "Do you want websites to show?"
+  # website_input = gets.chomp.downcase
   qwerty_hash = qwerty(times_square,user_input)
   qwerty_hash[:name].length.times do |x|
     puts "The name of the venue is #{qwerty_hash[:name][x]}"
     puts "It is located at #{qwerty_hash[:address][x]}"
-    if qwerty_hash[:phone_number][x].to_s != "null"
-      puts "The phone number is #{qwerty_hash[:phone_number][x].to_s}"
+    if phone_input == "yes"
+      puts "The phone number is #{qwerty_hash[:phone_number][x]}"
     end
+    # if website_input == "yes"
+    #   puts "The website is #{qwerty_hash[:website][x]}"
+    # end
     puts
   end
 end

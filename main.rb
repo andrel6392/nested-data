@@ -1195,10 +1195,11 @@ times_square["data"][0][11] Address
 times_square["data"][0][12] Phone Number
 =end
 
-def qwerty(times_square,user_input)
+def qwerty(times_square,venue_type)
+  # holiday_hash[:spring][:memorial_day] << supply
   venues = {:name => [],  :address => [], :phone_number => []}
   times_square["data"].each do |activities|
-    if activities[9] == user_input
+    if activities[9] == venue_type
       venues[:name] << activities[8]
       venues[:address] << activities[11]
       venues[:phone_number] << activities[12]
@@ -1207,10 +1208,21 @@ def qwerty(times_square,user_input)
   venues
 end
 
-puts "What type of venue are you interested in doing in Times Square? "
-user_input = gets.chomp.downcase.split(" ").collect {|word| word.capitalize }.join(" ")
+def asdfg(times_square)
+  puts "What type of venue are you interested in doing in Times Square? "
+  user_input = gets.chomp.downcase.split(" ").collect {|word| word.capitalize }.join(" ")
+  qwerty_hash = qwerty(times_square,user_input)
+  qwerty_hash[:name].length.times do |x|
+    puts "The name of the venue is #{qwerty_hash[:name][x]}"
+    puts "It is located at #{qwerty_hash[:address][x]}"
+    if qwerty_hash[:phone_number][x].to_s != "null"
+      puts "The phone number is #{qwerty_hash[:phone_number][x].to_s}"
+    end
+    puts
+  end
+end
 
-qwerty(times_square,user_input)
+asdfg(times_square)
 
 
 
